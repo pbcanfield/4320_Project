@@ -5,7 +5,7 @@ For our Final Project we propose the development of a system which can effective
 By optimizing how each issue is addressed and how work is distributed, project productivity can be largely increased. This will be done through a 
 combination of Augurs existing CHAOSS spreadsheet and a standalone tracking system.
 
-Our deployment server can be accessed [here](http://ec2-3-142-49-181.us-east-2.compute.amazonaws.com:5000)
+Our deployment server can be accessed [here](http://ec2-3-142-49-181.us-east-2.compute.amazonaws.com:5000).
 
 # Augur's ReadME
 
