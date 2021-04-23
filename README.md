@@ -7,6 +7,55 @@ combination of Augurs existing CHAOSS spreadsheet and a standalone tracking syst
 
 Our deployment server can be accessed [here](http://ec2-3-142-49-181.us-east-2.compute.amazonaws.com:5000).
 
+# Getting Started - Hello World
+Instructions needed get started accessing basic contributor analytics have been taken from [Augur's community reports repository](https://github.com/chaoss/augur-community-reports). They are as follows:
+
+
+## Setup
+### Prerequisites
+1. Python 3.x
+2. pip
+3. virtualenv package `pip3 install virtualenv`
+4. Install `geckodriver` for your platform if you want to write annotated PNG files out. This is a great way to automate report generation!
+    - osx: `brew install geckodriver`
+    - Linux, Windows: Download the latest geckodriver release for your platform from `https://github.com/mozilla/geckodriver/releases` and follow installation instructions. You can also get source code from that link. 
+
+### Setup augur-community-reports
+1. Fork the augur-community-reports repository
+2. Clone your fork of the repository locally
+```
+git clone https://github.com/<your-fork>/augur-community-reports
+````
+3. Create your python virtual environment wherever you routinely store them. We use a `virtualenvs` directory. 
+```
+virtualenv --python=python3 virtualenvs/augur-community-reports
+```
+4. Activate your virtual environment
+```
+source  ../../virtualenvs/augur-community-reports/bin/activate
+```
+5. Install the necessary Python libraries for Python 3.8 and earlier
+```
+pip install -r requirements.txt
+```
+6. Install the necessary Python libraries for Python 3.9 and later
+```
+pip install -r requirements3.9.txt 
+```
+7. Change into the directory of your clone
+```
+cd augur-community-reports
+```
+8. Run Jupyter Lab
+```
+jupyter lab
+```
+## Hello world
+
+Our basic helloworld script can be run through jupyter lab after following the above commands. This notebook simply interacts with Augur's database, extracting contribution information and organizing them based on user and number of commits. The data is then visualized with a bar chart. In later sprints, similar data will
+be used to inform our responsibility delegation system.
+
+
 # Augur's ReadME
 
 branch | status
