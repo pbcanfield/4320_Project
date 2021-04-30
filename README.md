@@ -7,7 +7,7 @@ combination of Augurs existing CHAOSS spreadsheet and a standalone tracking syst
 
 Our deployment server can be accessed [here](http://ec2-3-142-49-181.us-east-2.compute.amazonaws.com:5000).
 
-# Getting Started - Hello World
+# Getting Started
 Instructions needed get started accessing basic contributor analytics have been taken from [Augur's community reports repository](https://github.com/chaoss/augur-community-reports). They are as follows:
 
 
@@ -50,11 +50,13 @@ cd augur-community-reports
 ```
 jupyter lab
 ```
-## Hello world
 
+## Hello world
 Our basic helloworld script can be run through jupyter lab after following the above commands. This notebook simply interacts with Augur's database, extracting contribution information and organizing them based on user and number of commits. The data is then visualized with a bar chart. In later sprints, similar data will
 be used to inform our responsibility delegation system.
 
+## Running the backend skeleton code.
+Our backend skeleton code can be run via the *main.py* file. Simply run this file in your virtual environment to show the basic framework for our code. This sprint contains several searching and visualization features.
 
 # Augur's ReadME
 
