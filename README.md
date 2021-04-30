@@ -50,6 +50,10 @@ cd augur-community-reports
 ```
 jupyter lab
 ```
+
+## Running the backend skeleton code.
+Our backend skeleton code can be run via the *main.py* file. Simply run this file in your virtual environment to show the basic framework for our code. This sprint contains several searching and visualization features.
+
 ## Hello world
 
 Our basic helloworld script can be run through jupyter lab after following the above commands. This notebook simply interacts with Augur's database, extracting contribution information and organizing them based on user and number of commits. The data is then visualized with a bar chart. In later sprints, similar data will
