@@ -291,24 +291,29 @@ class DataManager():
             
             self.__df = df
 
-    def get_pie_by_name(self, name):
+    def get_pie_data_by_name(self, name):
         names_dataframe = self.__df[self.__df['login'] == name]['action'].value_counts(normalize=True)
+        names_dataframe.rename(index={0: 'Action', 1: 'Proportion'})
+        
         display(names_dataframe)
-        names_dataframe.plot.pie()
-        plt.tight_layout()
-        plt.show()
+
+        return list(names_dataframe.iloc[0]), list(names_dataframe.iloc[1])
+
+        
+        #plt.tight_layout()
+        #plt.show()
 
     def display_df(self):
         display(self.__df)
 
-    def display_most_contributions(self, threshold=10):
+    def display_most_contributions(self, ax, threshold=10):
         gk = self.__df.groupby('login')
         size_df = gk.size().sort_values(ascending=False) 
         subset = size_df[:threshold]
         display(subset)
-        subset.plot.bar()
-        plt.tight_layout()
-        plt.show()
+        subset.plot.bar(ax=ax)
+        #plt.tight_layout()
+        #plt.show()
 
     def list_names(self, repo_name):
         dataframe = self.__df[self.__df['repo_name'] == repo_name]

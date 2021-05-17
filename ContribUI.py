@@ -45,13 +45,13 @@ class StartPage(tk.Frame):
     top_contrib_label_text = None
     top_contrib_label = None    
     top_contrib_figure = None
-    top_contrib_graph = None
+    top_contrib_ax = None
     top_contrib_canvas = None
 
     single_contrib_label_text = None
     single_contrib_label = None
     single_contrib_figure = None
-    single_contrib_graph = None
+    single_contrib_ax = None
     single_contrib_canvas = None
 
     #Repository Names label and text box.
@@ -90,11 +90,13 @@ class StartPage(tk.Frame):
         self.top_contrib_label.grid(column = 0, row = 0, sticky = 'nw')
 
         self.top_contrib_figure = Figure(figsize=(5,3), dpi=100)
-        self.top_contrib_graph = self.top_contrib_figure.add_subplot(111)
+        self.top_contrib_ax = self.top_contrib_figure.add_subplot(111)
         self.top_contrib_canvas = FigureCanvasTkAgg(self.top_contrib_figure, self)
 
         self.top_contrib_canvas.draw()
         self.top_contrib_canvas.get_tk_widget().grid(column = 0, row = 1)
+
+        self.generate_top_contributors()
 
         #Searched contributor.
         self.single_contrib_label_text = tk.StringVar(self)
@@ -103,7 +105,7 @@ class StartPage(tk.Frame):
         self.single_contrib_label.grid(column = 0, row = 2, sticky = 'nw')
 
         self.single_contrib_figure = Figure(figsize=(5,3), dpi=100)
-        self.single_contrib_graph = self.single_contrib_figure.add_subplot(111)
+        self.single_contrib_ax = self.single_contrib_figure.add_subplot(111)
         self.single_contrib_canvas = FigureCanvasTkAgg(self.single_contrib_figure, self)
 
         self.single_contrib_canvas.draw()
@@ -143,7 +145,7 @@ class StartPage(tk.Frame):
         self.single_contrib_search_button.grid(column = 2, row = 6, sticky = 'nw')
 
         self.set_repository_names()
-
+        #self.
 
     def set_repository_names(self):
         repo_names = self.data_manager.list_repos()
@@ -159,10 +161,10 @@ class StartPage(tk.Frame):
 
         
     def search_contributors(self):
-        repo_name = self.contrib_text_box.get('1.0', 'end').rstrip()
+        self.__repo_name = self.contrib_text_box.get('1.0', 'end').rstrip()
         self.contrib_text_box.delete('1.0','end')
         
-        contrib_names = self.data_manager.list_names(repo_name)
+        contrib_names = self.data_manager.list_names(self.__repo_name)
         
         contrib_string = ''
         if len(contrib_names) > 0:
@@ -176,25 +178,18 @@ class StartPage(tk.Frame):
         self.contrib_found_text_box.configure(state='disabled')
 
 
+    def generate_top_contributors(self, threshold=10):
+        self.data_manager.display_most_contributions(self.top_contrib_ax,threshold)
 
-
-    '''
+    
     def search_single_contributor(self):
-        contrib_name = self.single_contrib_text_box.get('1.0', 'end').rstrip()
+        self.__contrib_name = self.single_contrib_text_box.get('1.0', 'end').rstrip()
         self.single_contrib_text_box.delete('1.0','end')
         
-        contrib_names = self.data_manager.list_names(repo_name)
+        labels,data = self.data_manager.get_pie_data_by_name(self.__contrib_name)
+        print(labels)
+        print(data)
+
+        self.single_contrib_ax.pie(data, labels=labels)
         
-        contrib_string = ''
-        if len(contrib_names) > 0:
-            for name in contrib_names[:len(contrib_names) - 1]:
-                contrib_string += (name + ', ') if name != None else ''
-            contrib_string += contrib_names[-1]
-
-        self.contrib_found_text_box.configure(state='normal')
-        self.contrib_found_text_box.delete('1.0','end')
-        self.contrib_found_text_box.insert('insert', contrib_string)
-        self.contrib_found_text_box.configure(state='disabled')
-    '''
-
-
+        
