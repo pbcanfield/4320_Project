@@ -26,6 +26,10 @@ if __name__ == '__main__':
     '''
     manager = DataManager()
 
+    manager.display_df()
+
+    #print(manager.get_action_types())
+
     contribui = ContribUI(className='UI')
     contribui.initialize(data_manager=manager)
     contribui.mainloop()

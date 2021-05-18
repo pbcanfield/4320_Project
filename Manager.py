@@ -292,12 +292,8 @@ class DataManager():
             self.__df = df
 
     def get_pie_data_by_name(self, name):
-        names_dataframe = self.__df[self.__df['login'] == name]['action'].value_counts(normalize=True)
-        names_dataframe.rename(index={0: 'Action', 1: 'Proportion'})
-        
-        display(names_dataframe)
-
-        return list(names_dataframe.iloc[0]), list(names_dataframe.iloc[1])
+        names_series = self.__df[self.__df['login'] == name]['action'].value_counts(normalize=False)
+        return list(names_series.keys()), list(names_series)
 
         
         #plt.tight_layout()
@@ -312,6 +308,7 @@ class DataManager():
         subset = size_df[:threshold]
         display(subset)
         subset.plot.bar(ax=ax)
+        ax.get_figure().tight_layout()
         #plt.tight_layout()
         #plt.show()
 
@@ -322,11 +319,9 @@ class DataManager():
     def list_repos(self):
         return self.__df['repo_name'].unique()
 
-
-    
     #Returns a series of the top 'threshold' number of individuals to work on a specific type of contribtion
     #in a given repository.
-    def search_similar_contributions(self, repo_name, action, threshold=10):
+    def search_similar_contributions(self, ax, repo_name, action, threshold=10):
         #This should search the dataframe and return the user who has performed the most 
         #amount of the same action in this database.
         dataframe = self.__df[self.__df['repo_name'] == repo_name]
@@ -334,8 +329,9 @@ class DataManager():
         dataframe = dataframe.groupby('login').size().sort_values(ascending=False)[:threshold]
         display(dataframe)
 
-        dataframe.plot.bar()
-        plt.tight_layout()
-        plt.show()
+        dataframe.plot.bar(ax=ax)
+        ax.get_figure().tight_layout()
 
     
+    def get_action_types(self):
+        return list(self.__df['action'].unique())
