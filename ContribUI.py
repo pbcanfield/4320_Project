@@ -23,8 +23,7 @@ class ContribUI(tk.Tk):
     def initialize(self, data_manager):
         #self.geometry('%dx%d' % (self.winfo_screenwidth(),self.winfo_screenheight()))
         container = tk.Frame(self)
-        #self.geometry('1920x1080')
-        self.geometry('1080x1920')
+        self.geometry('1920x1080')
 
         container.pack(fill=tk.BOTH,expand=True)
 
@@ -262,6 +261,7 @@ class StartPage(tk.Frame):
         labels,data = self.data_manager.get_pie_data_by_name(self.__contrib_name)
         
         self.single_contrib_ax.pie(data, labels=labels)
+        self.single_contrib_ax.get_figure().tight_layout()
         self.single_contrib_canvas.draw()        
 
     def search_similar_issues(self,threshold=10):

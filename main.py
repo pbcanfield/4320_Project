@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     #print(manager.get_action_types())
 
-    contribui = ContribUI(className='UI')
+    contribui = ContribUI(className='Community Reports Visualizer')
     contribui.initialize(data_manager=manager)
     contribui.mainloop()
 
