@@ -204,6 +204,9 @@ class StartPage(tk.Frame):
         
         self.__repo_name = 'augur'
 
+        self.single_contrib_ax.clear()
+        self.similar_contrib_ax.clear()
+
 
     def set_repository_names(self):
         repo_names = self.data_manager.list_repos()
@@ -252,6 +255,8 @@ class StartPage(tk.Frame):
 
     
     def search_single_contributor(self):
+        self.single_contrib_ax.clear()
+
         self.__contrib_name = self.single_contrib_text_box.get('1.0', 'end').rstrip()
         self.single_contrib_text_box.delete('1.0','end')
         labels,data = self.data_manager.get_pie_data_by_name(self.__contrib_name)
@@ -260,6 +265,8 @@ class StartPage(tk.Frame):
         self.single_contrib_canvas.draw()        
 
     def search_similar_issues(self,threshold=10):
+        self.similar_contrib_ax.clear()
+
         self.__action_name = self.similar_contrib_text_box.get('1.0', 'end').rstrip()
         self.similar_contrib_text_box.delete('1.0','end')
 
